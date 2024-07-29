@@ -18,7 +18,7 @@
 ## Tecnologias utilizadas
 
 - React JS
-- React Hooks()
+- React Hooks
 - React-router-dom
 - Axios
 - React-toastify
