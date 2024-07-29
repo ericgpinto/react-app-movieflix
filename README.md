@@ -2,7 +2,8 @@
 
 ## Descrição
 
-#### A ideia deste projeto é consumir a API de filmes The Movie DB.
+#### A ideia deste projeto é desenvolver um SPA, com base em dados vindos da API de filmes The Movie DB. 
+#### O usuário pode acessar os filmes em cartaz e adiciona-los na sua lista de interesse.
 
 #### Site oficial da API: https://www.themoviedb.org/
 
