@@ -10,11 +10,21 @@ export default function Favorites() {
     setMovies(JSON.parse(list) || []);
   }, []);
 
-  function handleRemoveMovie() {}
+  function handleRemoveMovie(id) {
+    let filterMovies = movies.filter((item) => {
+      return item.id !== id;
+    });
+    setMovies(filterMovies);
+    localStorage.setItem("@movieflix", JSON.stringify(filterMovies));
+  }
 
   return (
     <div className="my-movies">
       <h1>My Movies</h1>
+
+      {movies.length === 0 && (
+        <span style={{ color: "red" }}>You don't have any movies saved!</span>
+      )}
 
       <ul>
         {movies.map((item) => {
@@ -23,7 +33,9 @@ export default function Favorites() {
               <span>{item.title}</span>
               <div>
                 <Link to={`/movie-details/${item.id}`}>See Details</Link>
-                <button onClick={handleRemoveMovie}>Excluir</button>
+                <button onClick={() => handleRemoveMovie(item.id)}>
+                  Excluir
+                </button>
               </div>
             </li>
           );
