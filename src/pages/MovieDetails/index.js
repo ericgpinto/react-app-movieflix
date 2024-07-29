@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./movie.css";
 
 import api from "../../services/api";
 
 export default function MovieDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [movie, setMovie] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -23,11 +25,33 @@ export default function MovieDetails() {
           setMovie(response.data);
           setLoading(false);
         })
-        .catch(() => {});
+        .catch(() => {
+          navigate("/", { replace: true });
+          return;
+        });
     }
 
     loadMovie();
-  }, []);
+  }, [navigate, id]);
+
+  function saveMovie() {
+    const list = localStorage.getItem("@movieflix");
+
+    let savedMovies = JSON.parse(list) || [];
+
+    const hasMovie = savedMovies.some(
+      (savedMovie) => savedMovie.id === movie.id
+    );
+
+    if (hasMovie) {
+      alert("Movie already at the list.");
+      return;
+    }
+
+    savedMovies.push(movie);
+    alert("Movie saved with successfuly");
+    localStorage.setItem("@movieflix", JSON.stringify(savedMovies));
+  }
 
   if (loading) {
     return (
@@ -49,9 +73,15 @@ export default function MovieDetails() {
       <strong>Average:{movie.vote_average} / 10</strong>
 
       <div className="area-buttons">
-        <button>Salvar</button>
+        <button onClick={saveMovie}>Salvar</button>
         <button>
-          <a href="#">Trailer</a>
+          <a
+            target="blank"
+            rel="external"
+            href={`https://youtube.com/results?search_query=${movie.title} Trailer`}
+          >
+            Trailer
+          </a>
         </button>
       </div>
     </div>
