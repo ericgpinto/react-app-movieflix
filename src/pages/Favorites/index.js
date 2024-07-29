@@ -36,7 +36,7 @@ export default function Favorites() {
               <div>
                 <Link to={`/movie-details/${item.id}`}>See Details</Link>
                 <button onClick={() => handleRemoveMovie(item.id)}>
-                  Excluir
+                  Delete
                 </button>
               </div>
             </li>

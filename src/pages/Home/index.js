@@ -16,7 +16,6 @@ export default function Home() {
           page: 1,
         },
       });
-      console.log(response.data.results.slice(0, 10));
       setMoviesData(response.data.results.slice(0, 10));
       setLoading(false);
     }
@@ -43,7 +42,7 @@ export default function Home() {
                 src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                 alt={movie.title}
               />
-              <Link to={`/movie-details/${movie.id}`}>Acessar</Link>
+              <Link to={`/movie-details/${movie.id}`}>Details</Link>
             </article>
           );
         })}
